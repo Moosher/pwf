@@ -1,0 +1,24 @@
+<mat-progress-bar color="primary" class="loader" *ngIf="enviando" mode="indeterminate"></mat-progress-bar>
+<div class="d-flex flex-column align-items-center justify-content-around">
+    <div class="d-flex align-items-center">
+        <mat-icon class="mr-2">supervised_user_circle</mat-icon>
+        <h4 class="m-0">AUTENTICAÇÃO</h4>
+    </div>
+    <form [formGroup]="form" class="d-flex flex-column mt-4 w-50">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Login</mat-label>
+            <input formControlName="login" type="text" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Senha</mat-label>
+            <input formControlName="senha" type="password" matInput>
+        </mat-form-field>
+
+        <div class="d-flex justify-content-between">
+            <button type="button" mat-raised-button>LIMPAR</button>
+            <button type="submit" mat-raised-button color="primary" class="w-25" (click)="doLogin()"
+                [disabled]="!form.valid || enviando">ENVIAR</button>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{data.nome}}</h1>
+<div mat-dialog-content>
+    <p>Informe a quantidade desejada</p>
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Quantidade desejada</mat-label>
+        <mat-select #select cdkFocusInitial >
+            <mat-option  *ngFor="let qtd of qtdMax" [value]="qtd">
+                {{ qtd }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions class="w-100 d-flex justify-content-between align-items-center">
+    <button mat-button mat-dialog-close>CANCELAR</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="select.value">SALVAR</button>
+</div>

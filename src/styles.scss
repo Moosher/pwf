@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+
+$primary: #673ab7;
+$secondary: #00aeef;
+$tertiary: #e2eaec;
+
+html, body { height: 100%; 
+    background: $tertiary;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container{
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.header{
+    background: $secondary;
+}
+
+.w-btn{
+    color: #ffffff;
+}
+
+.w-10{
+    width: 10% !important;
+}
+.w-15{
+    width: 15% !important;
+}
+
+.fs-14{
+    font-size: 14px;
+}
+
+.loader{
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+}
+
+.cr{
+    color: red;
+}
+
+.cg{
+    color: green;
+}

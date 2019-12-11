@@ -1,0 +1,52 @@
+<mat-progress-bar color="primary" class="loader" *ngIf="enviando" mode="indeterminate"></mat-progress-bar>
+<div class="d-flex flex-column align-items-center justify-content-around">
+    <div class="d-flex align-items-center">
+        <mat-icon class="mr-2">shopping_cart</mat-icon>
+        <h4 class="m-0">PRODUTOS</h4>
+    </div>
+    <div class="w-100 d-flex justify-content-center mt-4">
+        <div class="w-75">
+            <div class="w-100">
+                <table class="w-100" mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="nome">
+                        <th mat-header-cell *matHeaderCellDef>Nome</th>
+                        <td mat-cell *matCellDef="let element">{{element.nome}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="medida">
+                        <th mat-header-cell *matHeaderCellDef>Medida</th>
+                        <td mat-cell *matCellDef="let element">{{element.medida}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="preco">
+                        <th mat-header-cell *matHeaderCellDef>Preço</th>
+                        <td mat-cell *matCellDef="let element"> {{element.valor | currency : 'BRL' : 'symbol'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="quantidade">
+                        <th mat-header-cell *matHeaderCellDef>Qtd. Sol. / Qtd. Total</th>
+                        <td mat-cell *matCellDef="let element"> {{element.quantidadeSolicitada}} / {{element.quantidade}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="acao">
+                        <th mat-header-cell *matHeaderCellDef class="w-15">Solicitar</th>
+                        <td mat-cell *matCellDef="let element" class="w-15">
+                            <mat-icon (click)="selecionarQuantidade(element)">arrow_drop_down_circle</mat-icon>
+                            <mat-icon (click)="abrirImagem(element)">photo_size_select_actual</mat-icon>
+                            <mat-icon (click)="element.quantidadeSolicitada = 0">cancel</mat-icon>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+            </div>
+            <div class="w-100 d-flex justify-content-between align-items-center mt-2">
+                <button mat-raised-button (click)="LimparProdutos()" class="w-25">LIMPAR</button>
+                <button mat-raised-button color="primary" (click)="solicitarProdutos()" class="w-25" [disabled]="!enableButtonSave()">SALVAR</button>
+            </div>
+        </div>
+    </div>
+</div>

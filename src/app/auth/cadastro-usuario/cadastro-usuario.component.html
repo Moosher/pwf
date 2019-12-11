@@ -1,0 +1,98 @@
+<mat-progress-bar color="primary" class="loader" *ngIf="enviando" mode="indeterminate"></mat-progress-bar>
+<div class="d-flex flex-column align-items-center justify-content-around">
+    <div class="d-flex align-items-center">
+        <mat-icon class="mr-2">supervised_user_circle</mat-icon>
+        <h4 class="m-0">CADASTRO</h4>
+    </div>
+
+    <form [formGroup]="formLogin" class="mt-4 w-50">
+        <div *ngIf="passoCadastro == 1" class="d-flex flex-column">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Login</mat-label>
+                <input formControlName="login" type="text" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Senha</mat-label>
+                <input formControlName="senha" type="password" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Confirmar senha</mat-label>
+                <input formControlName="confirmarSenha" type="password" matInput>
+                <mat-icon class="cg" *ngIf="validPasswords() && formLogin.controls.confirmarSenha.value" matSuffix>check_circle</mat-icon>
+                <mat-icon class="cr" *ngIf="!validPasswords() && formLogin.controls.confirmarSenha.value" matSuffix>cancel</mat-icon>
+            </mat-form-field>
+            <div class="w-100 d-flex flex-column align-items-start cr" id="senhaNotOK">
+                <span *ngIf="!validPasswords() && formLogin.controls.confirmarSenha.value" class="ml-1">
+                    As senhas informadas não coincidem
+                </span>
+            </div>
+        </div>
+    </form>
+    <form [formGroup]="formDados" class="w-50">
+        <div *ngIf="passoCadastro == 2" class="d-flex flex-column">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nome</mat-label>
+                <input formControlName="nome" type="text" matInput>
+            </mat-form-field>
+            <div class="d-flex align-items-center">
+                <mat-form-field appearance="outline">
+                    <mat-label>Data de nascimento</mat-label>
+                    <input DateMask formControlName="dataNascimento" type="text" matInput (blur)="calcularIdade()">
+                </mat-form-field>
+                <b *ngIf="idade" class="ml-4">{{idade}} anos</b>
+            </div>
+
+            <h5>Gênero</h5>
+            <mat-radio-group formControlName="sexo" class="mb-4 d-flex">
+                <mat-radio-button color="primary" value="M" class="mr-3">Masculino</mat-radio-button>
+                <mat-radio-button color="primary" value="F">Feminino</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </form>
+    <form [formGroup]="formEndereco" class="w-50">
+        <div *ngIf="passoCadastro == 3" class="d-flex flex-column">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>CEP</mat-label>
+                <input formControlName="cep" OnlyDigitsMask limit="8" type="text" matInput (blur)="findCep()">
+                <button *ngIf="!findingCEP" mat-icon-button matSuffix (click)="findCep()">
+                    <mat-icon>search</mat-icon>
+                </button>
+                <mat-spinner matSuffix *ngIf="findingCEP" diameter="30"></mat-spinner>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Logradouro</mat-label>
+                <input formControlName="logradouro" type="text" matInput readonly>
+            </mat-form-field>
+            <div class="d-flex justify-content-between">
+                <mat-form-field appearance="outline" class="w-25">
+                    <mat-label>Número</mat-label>
+                    <input formControlName="numero" OnlyDigitsMask type="text" matInput>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-50">
+                    <mat-label>Complemento</mat-label>
+                    <input formControlName="complemento" type="text" matInput>
+                </mat-form-field>
+            </div>
+            <div class="d-flex justify-content-between">
+                <mat-form-field appearance="outline" class="w-50">
+                    <mat-label>Cidade</mat-label>
+                    <input formControlName="cidade" type="text" matInput readonly>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-25">
+                    <mat-label>UF</mat-label>
+                    <input formControlName="uf" type="text" matInput readonly>
+                </mat-form-field>
+            </div>
+
+        </div>
+    </form>
+
+    <div class="d-flex w-50" [ngClass]="passoCadastro == 1 ? ' justify-content-end' : ' justify-content-between'">
+        <button *ngIf="passoCadastro > 1" mat-raised-button class="w-25" (click)="previousForm()"
+            [disabled]="enviando">VOLTAR</button>
+        <button *ngIf="passoCadastro < 3" mat-raised-button color="primary" class="w-25" (click)="nextForm()"
+            [disabled]="!getForm().valid || !validPasswords()">PRÓXIMO</button>
+        <button *ngIf="passoCadastro == 3" mat-raised-button color="primary" class="w-25" (click)="sendData()"
+            [disabled]="!formEndereco.valid || enviando">FINALIZAR</button>
+    </div>
+</div>
