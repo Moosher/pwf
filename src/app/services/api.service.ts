@@ -21,7 +21,7 @@ export class APIService {
   constructor(private http: HttpClient) { }
 
   consultaCEP(cep: string) {
-    return this.http.get<Endereco>(`http://viacep.com.br/ws/${cep}/json`);
+    return this.http.get<Endereco>(`https://viacep.com.br/ws/${cep}/json`);
   }
 
   doLogin(user: Usuario) {
