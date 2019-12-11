@@ -47,6 +47,11 @@ export class ProdutosComponent implements OnInit {
   }
 
   selecionarQuantidade(produto: Produto){
+    if(produto.quantidade == 0){
+      this.openSnackBar("Não existe quantidade de produtos suficiente para emitir uma solicitação.");
+      return;
+    }
+
       const dialogRef = this.dialog.open(DialogQuantidadeComponent, {
         width: '350px',
         data: produto

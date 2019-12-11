@@ -8,15 +8,15 @@
     <form [formGroup]="formLogin" class="mt-4 w-50">
         <div *ngIf="passoCadastro == 1" class="d-flex flex-column">
             <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Login</mat-label>
+                <mat-label>Login*</mat-label>
                 <input formControlName="login" type="text" matInput>
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Senha</mat-label>
+                <mat-label>Senha*</mat-label>
                 <input formControlName="senha" type="password" matInput>
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Confirmar senha</mat-label>
+                <mat-label>Confirmar senha*</mat-label>
                 <input formControlName="confirmarSenha" type="password" matInput>
                 <mat-icon class="cg" *ngIf="validPasswords() && formLogin.controls.confirmarSenha.value" matSuffix>check_circle</mat-icon>
                 <mat-icon class="cr" *ngIf="!validPasswords() && formLogin.controls.confirmarSenha.value" matSuffix>cancel</mat-icon>
@@ -31,18 +31,19 @@
     <form [formGroup]="formDados" class="w-50">
         <div *ngIf="passoCadastro == 2" class="d-flex flex-column">
             <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Nome</mat-label>
+                <mat-label>Nome*</mat-label>
                 <input formControlName="nome" type="text" matInput>
             </mat-form-field>
             <div class="d-flex align-items-center">
                 <mat-form-field appearance="outline">
-                    <mat-label>Data de nascimento</mat-label>
+                    <mat-label>Data de nascimento*</mat-label>
                     <input DateMask formControlName="dataNascimento" type="text" matInput (blur)="calcularIdade()">
                 </mat-form-field>
                 <b *ngIf="idade" class="ml-4">{{idade}} anos</b>
             </div>
+            <span *ngIf="idade > 120 || idade < 5" id="senhaNotOK" class="cr">Informe uma data de nascimento válida (entre 5 e 120 anos)</span>
 
-            <h5>Gênero</h5>
+            <h5>Sexo*</h5>
             <mat-radio-group formControlName="sexo" class="mb-4 d-flex">
                 <mat-radio-button color="primary" value="M" class="mr-3">Masculino</mat-radio-button>
                 <mat-radio-button color="primary" value="F">Feminino</mat-radio-button>
@@ -52,7 +53,7 @@
     <form [formGroup]="formEndereco" class="w-50">
         <div *ngIf="passoCadastro == 3" class="d-flex flex-column">
             <mat-form-field appearance="outline" class="w-100">
-                <mat-label>CEP</mat-label>
+                <mat-label>CEP*</mat-label>
                 <input formControlName="cep" OnlyDigitsMask limit="8" type="text" matInput (blur)="findCep()">
                 <button *ngIf="!findingCEP" mat-icon-button matSuffix (click)="findCep()">
                     <mat-icon>search</mat-icon>
@@ -91,7 +92,7 @@
         <button *ngIf="passoCadastro > 1" mat-raised-button class="w-25" (click)="previousForm()"
             [disabled]="enviando">VOLTAR</button>
         <button *ngIf="passoCadastro < 3" mat-raised-button color="primary" class="w-25" (click)="nextForm()"
-            [disabled]="!getForm().valid || !validPasswords()">PRÓXIMO</button>
+            [disabled]="!getForm().valid || !validPasswords() || (idade && (idade > 120 || idade < 5))">PRÓXIMO</button>
         <button *ngIf="passoCadastro == 3" mat-raised-button color="primary" class="w-25" (click)="sendData()"
             [disabled]="!formEndereco.valid || enviando">FINALIZAR</button>
     </div>

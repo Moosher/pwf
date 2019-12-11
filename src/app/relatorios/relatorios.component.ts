@@ -13,6 +13,7 @@ export class RelatoriosComponent implements OnInit {
   displayedColumns: string[] = ['usuario', 'data', 'produto', 'quantidade', 'valor'];
   dataSource: MatTableDataSource<Pedido>;
   enviando: boolean;
+  valorTotal: number = 0 ;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -32,6 +33,7 @@ export class RelatoriosComponent implements OnInit {
       res => {
         this.dataSource = new MatTableDataSource<Pedido>(res);
         this.dataSource.paginator = this.paginator;
+        res.map(item => this.valorTotal += item.valorTotal);
       }, err => {
         this.enviando = false;
         this.openSnackBar(`${err.message} (${err.status})`)

@@ -49,7 +49,10 @@ export class CadastroUsuarioComponent implements OnInit {
   }
 
   calcularIdade() {
-    if(!this.formDados.controls.dataNascimento.value) return;
+    if(!this.formDados.controls.dataNascimento.value) {
+      this.idade = null;
+      return;
+    }
     let birthDate = new Date(this.formDados.controls.dataNascimento.value);
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();

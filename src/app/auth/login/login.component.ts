@@ -45,6 +45,11 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  limparCampos(){
+    this.form.controls.login.setValue(null);
+    this.form.controls.senha.setValue(null);
+  }
+
   openSnackBar(msg: string) {
     this.snackBar.open(msg, null, {
       duration: 3000,

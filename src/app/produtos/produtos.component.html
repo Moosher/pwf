@@ -31,9 +31,9 @@
                     <ng-container matColumnDef="acao">
                         <th mat-header-cell *matHeaderCellDef class="w-15">Solicitar</th>
                         <td mat-cell *matCellDef="let element" class="w-15">
-                            <mat-icon (click)="selecionarQuantidade(element)">arrow_drop_down_circle</mat-icon>
-                            <mat-icon (click)="abrirImagem(element)">photo_size_select_actual</mat-icon>
-                            <mat-icon (click)="element.quantidadeSolicitada = 0">cancel</mat-icon>
+                            <mat-icon class="cursors" (click)="selecionarQuantidade(element)">arrow_drop_down_circle</mat-icon>
+                            <mat-icon class="cursors" (click)="abrirImagem(element)">photo_size_select_actual</mat-icon>
+                            <mat-icon class="cursors" (click)="element.quantidadeSolicitada = 0">cancel</mat-icon>
                         </td>
                     </ng-container>
 
@@ -44,7 +44,7 @@
                 <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
             </div>
             <div class="w-100 d-flex justify-content-between align-items-center mt-2">
-                <button mat-raised-button (click)="LimparProdutos()" class="w-25">LIMPAR</button>
+                <button mat-raised-button (click)="LimparProdutos()" class="w-25" [disabled]="!enableButtonSave()">LIMPAR</button>
                 <button mat-raised-button color="primary" (click)="solicitarProdutos()" class="w-25" [disabled]="!enableButtonSave()">SALVAR</button>
             </div>
         </div>
