@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatSort } from '@angular/material';
 import { Produto } from './entities/produto';
 import { DataSource } from '@angular/cdk/table';
 import { DialogQuantidadeComponent } from './dialog-quantidade/dialog-quantidade.component';
@@ -14,12 +14,13 @@ import { DialogImgComponent } from './dialog-img/dialog-img.component';
 })
 export class ProdutosComponent implements OnInit {
 
-  displayedColumns: string[] = ['nome', 'medida', 'preco', 'quantidade', 'acao'];
+  displayedColumns: string[] = ['nome', 'medida', 'valor', 'quantidade', 'acao'];
   dataSource: MatTableDataSource<Produto>;
   enviando: boolean;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  
   constructor(
     private dialog: MatDialog,
     private apiService: APIService,
@@ -37,6 +38,7 @@ export class ProdutosComponent implements OnInit {
         res.filter(item  => item.quantidadeSolicitada == null).map(item => item.quantidadeSolicitada = 0);
         this.dataSource = new MatTableDataSource<Produto>(res);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }, err => {
         this.enviando = false;
         this.openSnackBar(`${err.message} (${err.status})`)
