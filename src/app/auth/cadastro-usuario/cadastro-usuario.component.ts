@@ -75,7 +75,7 @@ export class CadastroUsuarioComponent implements OnInit {
         this.preencherEndereco(res);
       }, err => {
         this.findingCEP = false;
-        this.openSnackBar(`${err.message} (${err.status})`)
+        this.openSnackBar( this.apiService.errorControl(err.status))
       }, () => {
         this.findingCEP = false;
       }
@@ -110,7 +110,7 @@ export class CadastroUsuarioComponent implements OnInit {
         this.apiService.generateToken(usuario.login, usuario.senha);
       }, err => {
         this.enviando = false;
-        this.openSnackBar(`${err.message} (${err.status})`)
+        this.openSnackBar( this.apiService.errorControl(err.status))
       }, () => {
         this.enviando = false;
         this.router.navigate(['/produtos']);

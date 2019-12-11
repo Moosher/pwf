@@ -41,7 +41,7 @@ export class ProdutosComponent implements OnInit {
         this.dataSource.sort = this.sort;
       }, err => {
         this.enviando = false;
-        this.openSnackBar(`${err.message} (${err.status})`)
+        this.openSnackBar( this.apiService.errorControl(err.status))
       }, () => {
         this.enviando = false;
       }

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       }, err => {
         this.enviando = false;
         this.apiService.destroyToken();
-        this.openSnackBar(`${err.message} (${err.status})`)
+        this.openSnackBar( this.apiService.errorControl(err.status))
       }, () => {
         this.enviando = false;
         this.router.navigate(['/produtos']);

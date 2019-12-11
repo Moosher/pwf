@@ -38,7 +38,7 @@ export class RelatoriosComponent implements OnInit {
         res.map(item => this.valorTotal += item.valorTotal);
       }, err => {
         this.enviando = false;
-        this.openSnackBar(`${err.message} (${err.status})`)
+        this.openSnackBar( this.apiService.errorControl(err.status))
       }, () => {
         this.enviando = false;
       }

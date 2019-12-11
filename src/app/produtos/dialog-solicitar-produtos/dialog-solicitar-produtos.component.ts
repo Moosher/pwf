@@ -32,7 +32,7 @@ export class DialogSolicitarProdutosComponent implements OnInit {
         this.enviando = false;
       }, err => {
         this.enviando = false;
-        this.openSnackBar(`${err.message} (${err.status})`)
+        this.openSnackBar( this.apiService.errorControl(err.status))
       }
     );
   }

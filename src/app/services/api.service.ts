@@ -71,4 +71,24 @@ export class APIService {
     return headers;
   }
 
+  errorControl(code: number){
+    switch(code){
+      case 0:
+        return `Falha na rede (${code})`;
+      case 400:
+        return `falha na requisição (${code})`;
+      case 401:
+        return `Credenciais incorretas (${code})`;
+      case 403:
+        return `Não autorizado (${code})`;
+      case 404:
+        return `Não encontrado (${code})`;
+      case 500:
+        return `Erro no servidor (${code})`;
+      case 502:
+        return `Falha na comunicação do servidor (${code})`;
+      default:
+        return `Erro desconhecido, entre em contato com o suporte ${code}`
+    }
+  }
 }
