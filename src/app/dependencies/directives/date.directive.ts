@@ -73,8 +73,11 @@ export class DateMaskDirective implements ControlValueAccessor {
   }
 
   writeValue(value: any): void {
-    this.el.nativeElement.value = value;
-
+    if (typeof value == 'object' && value) {
+      this.el.nativeElement.value = value.toJSON().substring(0, 10).split('-').reverse().join('/');
+    } else {
+      this.el.nativeElement.value = value;
+    }
     if (value) {
       this.applyMask(this.el.nativeElement);
     }

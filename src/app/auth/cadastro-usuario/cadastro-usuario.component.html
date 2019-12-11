@@ -39,7 +39,7 @@
                     <mat-label>Data de nascimento*</mat-label>
                     <input DateMask formControlName="dataNascimento" type="text" matInput (blur)="calcularIdade()">
                 </mat-form-field>
-                <b *ngIf="idade" class="ml-4">{{idade}} anos</b>
+                <b *ngIf="idade" class="ml-4">{{idade}} ano(s)</b>
             </div>
             <span *ngIf="idade > 120 || idade < 5" id="senhaNotOK" class="cr">Informe uma data de nascimento válida (entre 5 e 120 anos)</span>
 
@@ -94,6 +94,6 @@
         <button *ngIf="passoCadastro < 3" mat-raised-button color="primary" class="w-25" (click)="nextForm()"
             [disabled]="!getForm().valid || !validPasswords() || (idade && (idade > 120 || idade < 5))">PRÓXIMO</button>
         <button *ngIf="passoCadastro == 3" mat-raised-button color="primary" class="w-25" (click)="sendData()"
-            [disabled]="!formEndereco.valid || enviando">FINALIZAR</button>
+            [disabled]="!formEndereco.valid || enviando || findingCEP">FINALIZAR</button>
     </div>
 </div>
