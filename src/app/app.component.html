@@ -1,8 +1,8 @@
 <div class="header w-100 d-flex align-items-center justify-content-around mb-4 p-3">
   <button *ngIf="!loggedIn" mat-button class="w-btn" routerLink="/login">Login</button>
-  <button mat-button class="w-btn" routerLink="/cadastro">Cadastrar usuário</button>
+  <button *ngIf="!loggedIn" mat-button class="w-btn" routerLink="/cadastro">Cadastrar usuário</button>
   <button *ngIf="loggedIn" mat-button class="w-btn" routerLink="/produtos">Produtos</button>
-  <button *ngIf="loggedIn" mat-button class="w-btn" routerLink="/relatorios">Relatórios</button>
+  <button *ngIf="loggedIn" mat-button class="w-btn" routerLink="/relatorios">Relatório</button>
   <button *ngIf="loggedIn" mat-button class="w-btn" (click)="doLogout()">Sair</button>
 </div>
 <div class="container pt-4 pb-4">

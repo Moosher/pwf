@@ -107,13 +107,12 @@ export class CadastroUsuarioComponent implements OnInit {
     this.enviando = true;
     this.apiService.cadastrarUsuario(usuario).subscribe(
       res => {
-        this.apiService.generateToken(usuario.login, usuario.senha);
+        /* this.apiService.generateToken(usuario.login, usuario.senha); */ // LOGIN AUTOMATICO NO CADASTRO
+        this.enviando = false;
+        this.router.navigate(['/login']);
       }, err => {
         this.enviando = false;
         this.openSnackBar( this.apiService.errorControl(err.status))
-      }, () => {
-        this.enviando = false;
-        this.router.navigate(['/produtos']);
       }
     );
   }
