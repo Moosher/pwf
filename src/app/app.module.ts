@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AuthModule } from './auth/auth.module';
 registerLocaleData(ptBr)
 
 @NgModule({
@@ -24,7 +25,8 @@ registerLocaleData(ptBr)
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
-    DependenciesModule
+    DependenciesModule,
+    AuthModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, { provide: LOCALE_ID, useValue: "pt-BR" }, AuthGuard, APIService],
   bootstrap: [AppComponent]
